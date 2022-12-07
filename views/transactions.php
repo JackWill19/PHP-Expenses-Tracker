@@ -34,20 +34,29 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- YOUR CODE -->
+                <?php if(! empty($transactions)): ?> <!-- Checking to see if variable transactions exists -->
+                    <?php foreach($transactions as $transaction): ?> <!-- Looping through transactions -->
+                        <tr> <!-- displaying data from each interation into seperate columns by their key --> 
+                            <td><?= formatDate($transaction['date']) ?></td> <!-- DATE-->
+                            <td><?= $transaction['checkNumber'] ?></td> <!-- CHECK -->
+                            <td><?= $transaction['description'] ?></td> <!-- DESCRIPTION -->
+                            <td><?= formatDollarAmount($transaction['amount']) ?></td> <!-- AMOUNT -->
+                        </tr>
+                    <?php endforeach ?>
+                <?php endif ?>
             </tbody>
             <tfoot>
                 <tr>
                     <th colspan="3">Total Income:</th>
-                    <td><!-- YOUR CODE --></td>
+                    <td><?= formatDollarAmount($totals['netTotal']) ?? 0 ?></td>
                 </tr>
                 <tr>
                     <th colspan="3">Total Expense:</th>
-                    <td><!-- YOUR CODE --></td>
+                    <td><?= formatDollarAmount($totals['totalExpense']) ?? 0 ?></td>
                 </tr>
                 <tr>
                     <th colspan="3">Net Total:</th>
-                    <td><!-- YOUR CODE --></td>
+                    <td><?= formatDollarAmount($totals['totalIncome']) ?? 0 ?></td>
                 </tr>
             </tfoot>
         </table>
