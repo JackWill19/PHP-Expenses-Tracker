@@ -40,7 +40,19 @@
                             <td><?= formatDate($transaction['date']) ?></td> <!-- DATE-->
                             <td><?= $transaction['checkNumber'] ?></td> <!-- CHECK -->
                             <td><?= $transaction['description'] ?></td> <!-- DESCRIPTION -->
-                            <td><?= formatDollarAmount($transaction['amount']) ?></td> <!-- AMOUNT -->
+                            <td>
+                                <?php if($transaction['amount'] < 0): ?> <!-- If the amount is negative then make it red-->
+                                    <span style="color: red;">
+                                        <?= formatDollarAmount($transaction['amount']) ?> <!-- AMOUNT -->
+                                    </span>
+                                <?php elseif($transaction['amount'] > 0): ?> <!-- else make it green-->
+                                    <span style="color: green;">
+                                        <?= formatDollarAmount($transaction['amount']) ?> <!-- AMOUNT -->
+                                    </span>
+                                <?php else: ?>
+                                    <?= formatDollarAmount($transaction['amount']) ?>
+                                <?php endif ?>
+                            </td>
                         </tr>
                     <?php endforeach ?>
                 <?php endif ?>
